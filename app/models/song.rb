@@ -7,7 +7,9 @@ class Song < ActiveRecord::Base
   end
 
   def drake_made_this
-    drake_id = (Artist.find_by(name: "Drake") || Artist.create(name: "Drake")).id
+    # first way w/o noticing the note about ``.find_or_create_by`` method
+    # drake_id = (Artist.find_by(name: "Drake") || Artist.create(name: "Drake")).id
+    drake_id = Artist.find_or_create_by(name: "Drake").id
     self.update(artist_id: drake_id)
   end
 end
